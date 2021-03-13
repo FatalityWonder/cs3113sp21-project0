@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef NumberChars;
+//typedef NumberChars;
 
-struct NumberChars
+typedef struct NumberChars
 {
     unsigned char character[4];
     int bytes;
     int num;
-};
+} NumberChars;
 
 // size of array
 const int ARR_SIZE = 100;
@@ -134,9 +134,41 @@ int main()
 
         ++numDiffChars;
     }
-    printf("\ntestprint\n"); 
-
+    
     // sort
+    int max;
+    for(int i = 0; i < ARR_SIZE-1; ++i)
+    {
+        // no more characters to search
+        if(chararacterCount[i].num == 0)
+        {
+            break;
+        }
+
+        max = i;
+
+        for(int j = i + 1; j < ARR_SIZE; ++j)
+        {
+            // no more characters to search
+            if(chararacterCount[j].num == 0)
+            {
+                break;
+            }
+
+            if (chararacterCount[j].num > chararacterCount[max].num)
+            {
+                max = j;
+            }
+        }
+
+        //swap
+        if (max != i)
+        {
+            NumberChars arrChar = chararacterCount[i];
+            chararacterCount[i] = chararacterCount[max];
+            chararacterCount[max] = arrChar;
+        }
+    }
 
     // print char plus count
     for (int i = 0; i < ARR_SIZE; ++i)
