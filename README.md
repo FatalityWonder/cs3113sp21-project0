@@ -3,7 +3,7 @@
 2. How to compile
   *make clean
   *make all
-3. no known bugs
+3. does not read in null symbol for test 6
 4. Outside sources
   *https://www.cs.swarthmore.edu/~newhall/unixhelp/howto_makefiles.html
   *https://www.geeksforgeeks.org/merge-sort/
