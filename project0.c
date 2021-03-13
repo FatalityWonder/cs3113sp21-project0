@@ -50,27 +50,8 @@ int main()
         {
             tempChar[i] = 0;
         }
-    
-        /**if (temp == NULL) // handle null chars
-        {
-            // read in char
-            tempChar[0] = charByte;
-            int indexPrensent = hasChar(chararacterCount, tempChar);
-            if(indexPrensent >= 0)
-            {
-                ++chararacterCount[indexPrensent].num;
-                continue;
-            }
-            
-            // char not present
-            for (int i = 0; i < 4; ++i)
-            {
-                chararacterCount[numDiffChars].character[i] = tempChar[i];
-            }
-            chararacterCount[numDiffChars].bytes = 1;
-            ++chararacterCount[numDiffChars].num;
-        }
-        else **/if(temp < 128) // 1 byte (ascii) char
+        
+        if(temp < 128) // 1 byte (ascii) char
         { 
             // read in char
             tempChar[0] = charByte;
@@ -160,8 +141,8 @@ int main()
     }
     
     // sort
-    //mergeSort(chararacterCount, 0, ARR_SIZE - 1);
-    qsort(chararacterCount, ARR_SIZE, sizeof(NumberChars), comparator);
+    mergeSort(chararacterCount, 0, ARR_SIZE - 1);
+    //qsort(chararacterCount, ARR_SIZE, sizeof(NumberChars), comparator);
 
     // print char plus count
     for (int i = 0; i < ARR_SIZE; ++i)
