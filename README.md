@@ -6,4 +6,4 @@
 3. no known bugs
 4. Outside sources
   *https://www.cs.swarthmore.edu/~newhall/unixhelp/howto_makefiles.html
-  *https://www.geeksforgeeks.org/selection-sort/
+  *https://www.geeksforgeeks.org/merge-sort/
