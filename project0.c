@@ -11,7 +11,7 @@ typedef struct NumberChars
 } NumberChars;
 
 // size of array
-const int ARR_SIZE = 100000;
+const int ARR_SIZE = 100;
 
 // function prototype
 int hasChar(struct NumberChars mainArr[], unsigned char chars[]);
@@ -159,8 +159,6 @@ int main()
     // sort
     mergeSort(chararacterCount, 0, ARR_SIZE - 1);
 
-    printf("post sort");
-
     // print char plus count
     for (int i = 0; i < ARR_SIZE; ++i)
     {
@@ -288,8 +286,6 @@ void mergeSort(struct NumberChars mainArr[], int left, int right)
         // sort halves
         mergeSort(mainArr, left, mid);
         mergeSort(mainArr, mid + 1, right);
-
-        printf("premerge\n");
 
         merge(mainArr, left, mid, right);
     }
