@@ -11,10 +11,12 @@ typedef struct NumberChars
 } NumberChars;
 
 // size of array
-const int ARR_SIZE = 100000;
+const int ARR_SIZE = 100;
 
 // function prototype
 int hasChar(struct NumberChars mainArr[], unsigned char chars[]);
+void merge(struct NumberChars mainArr[], int left, int mid, int right);
+void mergeSort(struct NumberChars mainArr[], int left, int right);
 
 int main()
 {
@@ -46,7 +48,7 @@ int main()
             tempChar[i] = 0;
         }
     
-        if (temp == NULL) // handle null chars
+        /**if (temp == NULL) // handle null chars
         {
             // read in char
             tempChar[0] = charByte;
@@ -65,7 +67,7 @@ int main()
             chararacterCount[numDiffChars].bytes = 1;
             ++chararacterCount[numDiffChars].num;
         }
-        else if(temp < 128) // 1 byte (ascii) char
+        else **/if(temp < 128) // 1 byte (ascii) char
         { 
             // read in char
             tempChar[0] = charByte;
@@ -155,39 +157,9 @@ int main()
     }
     
     // sort
-    int max;
-    for(int i = 0; i < ARR_SIZE-1; ++i)
-    {
-        // no more characters to search
-        if(chararacterCount[i].num == 0)
-        {
-            break;
-        }
+    mergeSort(chararacterCount, 0, ARR_SIZE - 1);
 
-        max = i;
-
-        for(int j = i + 1; j < ARR_SIZE; ++j)
-        {
-            // no more characters to search
-            if(chararacterCount[j].num == 0)
-            {
-                break;
-            }
-
-            if (chararacterCount[j].num > chararacterCount[max].num)
-            {
-                max = j;
-            }
-        }
-
-        //swap
-        if (max != i)
-        {
-            NumberChars arrChar = chararacterCount[i];
-            chararacterCount[i] = chararacterCount[max];
-            chararacterCount[max] = arrChar;
-        }
-    }
+    printf("post sort");
 
     // print char plus count
     for (int i = 0; i < ARR_SIZE; ++i)
@@ -251,4 +223,74 @@ int hasChar(struct NumberChars mainArr[], unsigned char chars[])
     }
     // char not found
     return -1;
+}
+
+void merge(struct NumberChars mainArr[], int left, int mid, int right)
+{
+    int i, j, k;
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    struct NumberChars leftArr[n1];
+    struct NumberChars rightArr[n2];
+
+    for (i = 0; i < n1; ++i)
+    {
+        leftArr[i] = mainArr[left + i];
+    }
+    for (j = 0; j < n2; ++j)
+    {
+        rightArr[j] = mainArr[mid + 1 + j];
+    }
+
+    i = 0;
+    j = 0;
+    k = left;
+
+    while (i < n1 && j < n2)
+    {
+        if(leftArr[i].num >= rightArr[j].num)
+        {
+            mainArr[k] = leftArr[i];
+            ++i;
+        }
+        else
+        {
+            mainArr[k] = rightArr[j];
+            ++j;
+        }
+        ++k;
+    }
+
+    while (i < n1)
+    {
+        mainArr[k] = leftArr[i];
+        ++i;
+        ++k;
+    }
+
+    while (j < n2)
+    {
+        mainArr[k] = rightArr[j];
+        ++j;
+        ++k;
+    }
+    
+    
+}
+
+void mergeSort(struct NumberChars mainArr[], int left, int right)
+{
+    if (left < right)
+    {
+        int mid = left + (right - left) / 2;
+
+        // sort halves
+        mergeSort(mainArr, left, mid);
+        mergeSort(mainArr, mid + 1, right);
+
+        printf("premerge\n");
+
+        merge(mainArr, left, mid, right);
+    }
 }
