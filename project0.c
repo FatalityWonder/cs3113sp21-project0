@@ -17,6 +17,7 @@ const int ARR_SIZE = 100;
 int hasChar(struct NumberChars mainArr[], unsigned char chars[]);
 void merge(struct NumberChars mainArr[], int left, int mid, int right);
 void mergeSort(struct NumberChars mainArr[], int left, int right);
+int comparator(const struct NumberChars *a, const struct NumberChars *b);
 
 int main()
 {
@@ -157,7 +158,8 @@ int main()
     }
     
     // sort
-    mergeSort(chararacterCount, 0, ARR_SIZE - 1);
+    //mergeSort(chararacterCount, 0, ARR_SIZE - 1);
+    qsort(chararacterCount, ARR_SIZE, sizeof(NumberChars), comparator);
 
     // print char plus count
     for (int i = 0; i < ARR_SIZE; ++i)
@@ -289,4 +291,9 @@ void mergeSort(struct NumberChars mainArr[], int left, int right)
 
         merge(mainArr, left, mid, right);
     }
+}
+
+int comparator(const struct NumberChars *a, const struct NumberChars *b)
+{
+    return (a->num < b->num);
 }
