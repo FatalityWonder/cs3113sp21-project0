@@ -11,7 +11,7 @@ typedef struct NumberChars
 } NumberChars;
 
 // size of array
-const int ARR_SIZE = 100;
+const int ARR_SIZE = 100000;
 
 // function prototype
 int hasChar(struct NumberChars mainArr[], unsigned char chars[]);
